@@ -1,0 +1,45 @@
+<body class="bg-grisClaro min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md bg-white bg-opacity-90 rounded-3xl shadow-xl p-8 text-center fade-in-up" *ngIf="tipo !== null">
+        <!-- Encabezado común -->
+        <h1 class="text-4xl font-extrabold text-azulSecundario mb-4">
+            {{ mensaje }}
+        </h1>
+
+        <!-- Contenido para tipo 1 -->
+        <ng-container *ngIf="tipo === 1">
+            <p class="text-gray-700 text-lg mb-6">Bienvenido a Trivia!</p>
+            <p class="text-gray-700 text-lg mb-6">Tu cuenta ha sido verificada con éxito.</p>
+            <button
+                class="mt-6 bg-azulPrincipal hover:bg-azulAcento text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
+                Ir al Login
+            </button>
+        </ng-container>
+
+        <!-- Contenido para tipo 3 -->
+        <ng-container *ngIf="tipo === 3">
+            <p class="mt-4 text-gray-700">El enlace que has usado no es válido.</p>
+            <p class="text-gray-600">Puedes crear una cuenta para comenzar a jugar.</p>
+            <button
+                class="mt-6 bg-azulPrincipal hover:bg-azulAcento text-white font-semibold py-3 px-8 rounded-full shadow-lg transition">
+                Crear Cuenta
+            </button>
+        </ng-container>
+
+        <!-- Contenido para tipo 2 -->
+        <ng-container *ngIf="tipo === 2">
+            <p class="mt-4 text-gray-700">El enlace ya no funciona.</p>
+            <p class="text-gray-600">¿Quieres que enviemos otro token?</p>
+            <button class="mt-6 bg-azulAcento hover:bg-azulSecundario text-white px-6 py-2 rounded-lg">
+                Reenviar Correo
+            </button>
+        </ng-container>
+
+        <!-- Contenido para tipo 0 -->
+        <ng-container *ngIf="tipo === 0">
+            <p class="mt-4 text-gray-700">
+                En este momento ha ocurrido un error, inténtalo más adelante.
+            </p>
+            <p class="text-gray-600">{{error || null}}</p>
+        </ng-container>
+    </div>
+</body>

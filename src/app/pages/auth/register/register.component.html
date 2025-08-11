@@ -1,0 +1,76 @@
+<div class="bg-gray-100 flex justify-center items-center h-screen">
+  
+    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+        <h1 class="text-2xl font-semibold mb-4">Registrate</h1>
+        <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+                <label for="nombre_usuario" class="block text-gray-600">Nombre de Usuario</label>
+                <input type="text" id="nombre_usuario" formControlName="nombre_usuario"
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                    autocomplete="off" />
+                <div *ngIf="registroForm.get('nombre_usuario')?.invalid && registroForm.get('nombre_usuario')?.touched"
+                    class="text-red-500 text-sm mt-1">
+                    El nombre de usuario es obligatorio.
+                </div>
+            </div>
+        
+            <div class="mb-4">
+                <label for="email" class="block text-gray-600">Email</label>
+                <input type="email" id="email" formControlName="email"
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                    autocomplete="off" />
+                <div *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched"
+                    class="text-red-500 text-sm mt-1">
+                    Introduce un email válido.
+                </div>
+            </div>
+        
+            <div class="mb-4">
+                <label for="passwordUno" class="block text-gray-600">Contraseña</label>
+                <input type="password" id="passwordUno" formControlName="passwordUno"
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                    autocomplete="off" />
+                <div *ngIf="registroForm.get('passwordUno')?.invalid && registroForm.get('passwordUno')?.touched"
+                    class="text-red-500 text-sm mt-1">
+                    La contraseña es obligatoria.
+                </div>
+            </div>
+        
+            <div class="mb-4">
+                <label for="passwordDos" class="block text-gray-600">Confirmar Contraseña</label>
+                <input type="password" id="passwordDos" formControlName="passwordDos"
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                    autocomplete="off" />
+                <div *ngIf="registroForm.get('passwordDos')?.invalid && registroForm.get('passwordDos')?.touched"
+                    class="text-red-500 text-sm mt-1">
+                    Debes confirmar tu contraseña.
+                </div>
+            </div>
+            <div *ngIf="registroForm.hasError('passwordMismatch') && registroForm.get('passwordDos')?.touched"
+                class="text-red-500 text-sm mt-1">
+                Las contraseñas no coinciden.
+            </div>
+        
+            <button type="submit" [disabled]="registroForm.invalid"
+                class="bg-azulSecundario hover:bg-azulAcento text-white font-semibold rounded-md py-2 px-4 w-full">
+                Registro
+            </button>
+            <div *ngIf="mensaje"
+                class="text-blue-500 text-sm mt-1">
+                {{mensaje}}
+            </div>
+        </form>
+
+        <div class="mt-6 text-blue-500 text-center">
+            ¿Tienes cuenta?
+            <a routerLink="/login" class="hover:underline">
+                Logueate acá
+            </a>
+        </div>
+
+    </div>
+<div class="w-1/2 h-screen hidden lg:flex items-center justify-center bg-azulBannerLogin">
+    <img src="assets/banners/triviaRegistrate.png" alt="TriviaConnect Banner"
+        class="object-contain max-w-full max-h-full">
+</div>
+</div>
