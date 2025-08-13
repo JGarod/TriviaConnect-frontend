@@ -1,0 +1,30 @@
+<!-- <div *ngIf="userData">
+    <p>Hola, {{ userData.username }}</p>
+    <p>ID: {{ userData.id }}</p>
+</div> -->
+
+
+<div class="flex min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+    <!-- Sidebar (descomentarlo si lo usas) -->
+    <!-- <app-sidebar class="hidden md:block w-60 bg-white dark:bg-gray-800 border-r dark:border-gray-700"></app-sidebar> -->
+
+    <div class="flex-1 flex flex-col">
+        <header
+            class="h-16 bg-white dark:bg-gray-800 shadow flex items-center justify-between px-4 border-b border-gray-200 dark:border-gray-700">
+            <span>Hola, {{ userData?.username }}</span>
+            <button (click)="logout()"
+                class="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+                Cerrar sesión
+            </button>
+        </header>
+
+        <main class="p-4 flex-1 overflow-y-auto">
+            <router-outlet></router-outlet> <!-- Aquí carga dashboard, friends, etc -->
+        </main>
+
+        <!-- Menú móvil abajo (si lo usas) -->
+        <!-- <app-mobile-menu class="block md:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700"></app-mobile-menu> -->
+    </div>
+
+</div>

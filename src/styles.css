@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Variables para modo claro
+:root {
+    --azul-principal: #667FFF;
+    --gris-claro: #F3F4F6;
+    --blanco-puro: #FFFFFF;
+    --azul-secundario: #647DFF;
+    --gris-claro2: #F5F5F6;
+    --azul-acento: #748BFE;
+    --azul-banner-login: #5E86FF;
+}
+
+.dark {
+    --azul-principal: #4753FF;
+    --gris-claro: #1F2937;
+    --blanco-puro: #F9FAFB;
+    --azul-secundario: #5369F8;
+    --gris-claro2: #374151;
+    --azul-acento: #4B6CF7;
+    --azul-banner-login: #3B55F7;
+} */

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class', // activar modo oscuro por clase 'dark's
   content: [
     "./src/**/*.{html,ts}",
   ],
@@ -13,6 +14,13 @@ module.exports = {
         grisClaro2: "#F5F5F6",
         azulAcento: "#748BFE",
         azulBannerLogin: "#5E86FF",
+        // azulPrincipal: "var(--azul-principal)",
+        // grisClaro: "var(--gris-claro)",
+        // blancoPuro: "var(--blanco-puro)",
+        // azulSecundario: "var(--azul-secundario)",
+        // grisClaro2: "var(--gris-claro2)",
+        // azulAcento: "var(--azul-acento)",
+        // azulBannerLogin: "var(--azul-banner-login)"
       },
     },
   },
