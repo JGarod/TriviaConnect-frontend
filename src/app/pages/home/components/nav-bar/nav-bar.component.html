@@ -1,0 +1,36 @@
+<aside class="hidden md:flex flex-col h-full bg-blancoPuro shadow-sm border-r transition-all duration-300"
+    [class.w-16]="rsidebarMinimizado()" [class.w-30]="!rsidebarMinimizado()">
+    <div class="flex flex-col h-full">
+        <!-- Toggle -->
+        <div class="p-4 border-b">
+            <button (click)="toggleSidebar()"
+                class="w-full flex items-center justify-center p-2 rounded-lg hover:bg-blancoPuro transition-colors group"
+                [title]="rsidebarMinimizado() ? 'Expandir sidebar' : 'Minimizar sidebar'">
+                <span class="material-icons text-grisOscuro group-hover:text-grisOscuro">
+                    {{ rsidebarMinimizado() ? 'chevron_right' : 'menu' }}
+                </span>
+            </button>
+        </div>
+
+        <!-- Navegación -->
+        <nav class="flex-1 p-4 space-y-2">
+            <a *ngFor="let item of rnavigationItems()" [routerLink]="item.route"
+                routerLinkActive="bg-azulPrincipal text-azulSecundario"
+                class="flex items-center p-3 rounded-lg hover:bg-blancoPuro transition-colors group">
+                <span class="material-icons text-grisOscuro group-hover:text-azulSecundario">{{ item.icon }}</span>
+                <span [class]="'ml-3 font-medium ' + (rsidebarMinimizado() ? 'hidden' : 'block')">
+                    {{ item.label }}
+                </span>
+            </a>
+        </nav>
+
+        <!-- Logout -->
+        <div class="p-4 border-t">
+            <button (click)="logout()"
+                class="w-full flex items-center p-3 rounded-lg hover:bg-red-50 text-red-600 transition-colors">
+                <span class="material-icons">logout</span>
+                <span [class]="'ml-3 font-medium ' + (rsidebarMinimizado() ? 'hidden' : 'block')">Cerrar Sesión</span>
+            </button>
+        </div>
+    </div>
+</aside>

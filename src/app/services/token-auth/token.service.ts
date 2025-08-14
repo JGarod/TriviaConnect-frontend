@@ -31,6 +31,7 @@ export class TokenService {
   //elimina el localstorage 
   logout() {
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem('sidebarMinimizado');
     this.router.navigate(['/login']);
   }
 

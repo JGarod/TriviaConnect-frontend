@@ -14,6 +14,7 @@ module.exports = {
         grisClaro2: "#F5F5F6",
         azulAcento: "#748BFE",
         azulBannerLogin: "#5E86FF",
+        grisOscuro: "#1F2937",
         // azulPrincipal: "var(--azul-principal)",
         // grisClaro: "var(--gris-claro)",
         // blancoPuro: "var(--blanco-puro)",
