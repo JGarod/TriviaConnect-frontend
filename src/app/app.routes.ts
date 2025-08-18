@@ -8,6 +8,7 @@ import { authGuard } from './guards/auth/auth.guard';
 import { guestGuard } from './guards/invitado/invitado.guard';
 import { DashboardComponent } from './pages/home/dashboard/dashboard.component';
 import { FriendsComponent } from './pages/home/friends/friends.component';
+import { ProfileComponent } from './pages/home/profile/profile.component';
 
 
 export const routes: Routes = [
@@ -21,7 +22,8 @@ export const routes: Routes = [
         canActivateChild: [authGuard], // Proteger todas las rutas hijas
         children: [
             { path: '', component: DashboardComponent },   // /  → Dashboard dentro de HomeComponent
-            { path: 'friends', component: FriendsComponent },  // /friends
+            { path: 'friends', component: FriendsComponent },  // /perfil
+            { path: 'profile/:slug', component: ProfileComponent },  // /friends
             // otras rutas hijas
         ]
     },

@@ -4,11 +4,15 @@ import { tap } from 'rxjs/operators';
 import {jwtDecode} from 'jwt-decode';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { NotyfService } from '../shared/notyf.service';
 
 export interface JwtPayload {
   id: number;
   username: string;
   exp: number;
+  slug: string;
+  uuid_imagen: string;
+  img?: string | null;
 }
 @Injectable({
   providedIn: 'root'
@@ -17,7 +21,7 @@ export class TokenService {
   private tokenKey = 'auth-token';
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private notyfService: NotyfService) { }
 
   //peticion de login y guarda el token 
   login(nombre_usuario: string, password: string) {
@@ -25,6 +29,8 @@ export class TokenService {
       .pipe(
         tap(response => {
           this.saveToken(response.token);
+          let nombre_usuarioData = this.getUserData();
+          this.notyfService.success(`Bienvenido ${nombre_usuarioData?.username}!`);
 })
       );
   }
@@ -33,6 +39,8 @@ export class TokenService {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem('sidebarMinimizado');
     this.router.navigate(['/login']);
+    this.notyfService.success('Has salido con exito');
+    return null
   }
 
   // obtiene el token del localstorage

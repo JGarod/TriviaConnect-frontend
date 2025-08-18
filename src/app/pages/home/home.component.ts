@@ -1,9 +1,11 @@
 import { Component, HostListener } from '@angular/core';
-import { TokenService } from '../../services/token-auth/token.service';
+import { JwtPayload, TokenService } from '../../services/token-auth/token.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AppMobileComponent } from './components/app-mobile/app-mobile.component';
+import { NavArribaComponent } from './components/nav-arriba/nav-arriba.component';
+import { environment } from '../../../environments/environment';
 
 
 export interface NavigationItem {
@@ -17,15 +19,16 @@ export interface NavigationItem {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, NavBarComponent, AppMobileComponent],
+  imports: [CommonModule, RouterModule, NavBarComponent, AppMobileComponent, NavArribaComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
-  public userData: any = null;
-  public showUserDropdown = false;
+  public userData: JwtPayload | null = null;
   public sidebarMinimizado = false;
+  public isMobile: boolean = false;
+  public cloudPath = environment.cloudinary_path;
 
   public navigationItems: NavigationItem[] = [
     {
@@ -56,37 +59,33 @@ export class HomeComponent {
   constructor(private authService: TokenService) { }
 
   ngOnInit() {
-    this.userData = this.authService.getUserData();
-    console.log(this.userData);
+    this.validarUsuario();
+    this.checkScreen();
+    window.addEventListener('resize', () => this.checkScreen());
+    // console.log(this.userData);
   }
 
+  validarUsuario() {
+    this.userData = this.authService.getUserData();
+    if (!this.userData) {
+      this.logout();
+    } else {
+      this.userData.img = `${this.cloudPath}${this.userData.uuid_imagen}.jpg?v=${Date.now()}`;;
+    }
+  }
+  //cerrar sesión
   logout(){
     this.userData = this.authService.logout();
   }
 
-
-
-
-  toggleUserDropdown() {
-    this.showUserDropdown = !this.showUserDropdown;
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkScreen();
   }
 
-  closeUserDropdown() {
-    this.showUserDropdown = false;
+  private checkScreen() {
+    this.isMobile = window.matchMedia('(max-width: 1023px)').matches;
   }
 
-
-  // Cerrar dropdowns/modales al hacer click fuera
-  // @HostListener('document:click', ['$event'])
-  // onDocumentClick(event: Event) {
-  //   const target = event.target as HTMLElement;
-  //   const dropdown = document.querySelector('[data-dropdown]');
-
-  //   if (dropdown && !dropdown.contains(target)) {
-  //     this.closeUserDropdown();
-  //   }
-  // }
-
-  // Cerrar modal móvil con tecla Escape
 
 }

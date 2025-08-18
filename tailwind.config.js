@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class', // activar modo oscuro por clase 'dark's
+  darkMode: 'class', // activar modo oscuro por clase 'dark'
   content: [
     "./src/**/*.{html,ts}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -11,19 +12,11 @@ module.exports = {
         grisClaro: "#F3F4F6",
         blancoPuro: "#FFFFFF",
         azulSecundario: "#647DFF",
-        grisClaro2: "#F5F5F6",
+        grisClaro2: "#b2b2b2",
         azulAcento: "#748BFE",
         azulBannerLogin: "#5E86FF",
         grisOscuro: "#1F2937",
-        // azulPrincipal: "var(--azul-principal)",
-        // grisClaro: "var(--gris-claro)",
-        // blancoPuro: "var(--blanco-puro)",
-        // azulSecundario: "var(--azul-secundario)",
-        // grisClaro2: "var(--gris-claro2)",
-        // azulAcento: "var(--azul-acento)",
-        // azulBannerLogin: "var(--azul-banner-login)"
       },
     },
   },
-  plugins: [],
 }

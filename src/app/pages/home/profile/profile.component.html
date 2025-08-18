@@ -1,0 +1,79 @@
+<div *ngIf="!isLoading"  class="flex justify-center items-start md:items-center min-h-screen" [ngStyle]="{
+    'background': 'linear-gradient(to bottom right, ' + userPreferences.color_primario + ', ' + userPreferences.color_secundario + ')'
+  }">
+    <div class="w-full max-w-md rounded-2xl shadow-xl bg-blancoPuro m-3 p-6 md:translate-y-[-40px]">
+
+        <!-- Botones de toggle -->
+        <div class="flex justify-between mb-6">
+            <button (click)="isEditing = false" class="flex items-center gap-2 px-4 py-2 rounded-xl transition"
+                [ngClass]="isEditing ? 'bg-gray-100 text-grisOscuro' : 'bg-azulSecundario text-blancoPuro'">
+                <span class="material-icons">person</span> Perfil
+            </button>
+        
+            <button (click)="isEditing = true" *ngIf="isUserCurrent"
+                class="flex items-center gap-2 px-4 py-2 rounded-xl transition"
+                [ngClass]="isEditing ? 'bg-azulSecundario text-blancoPuro' : 'bg-gray-100 text-grisOscuro'">
+                <span class="material-icons">edit</span> Editar
+            </button>
+        
+            <!-- Botón para agregar usuario (social) -->
+            <button *ngIf="!isUserCurrent && userPreferences.acepta_solicitud_amistad && !isEditing"
+                class="flex items-center gap-2 px-4 py-2 rounded-xl transition bg-green-500 hover:bg-green-600 text-white">
+                <span class="material-icons">person_add</span>
+            </button>
+        </div>
+
+        <!-- VISTA PERFIL -->
+        <div *ngIf="!isEditing" class="text-center space-y-4">
+        <div class="relative group w-28 h-28 mx-auto">
+            <!-- Avatar -->
+            <img [src]="user.img" alt="Avatar"
+                class="w-28 h-28 rounded-full border-4 border-purple-500 shadow-lg object-cover" />
+        
+            <div *ngIf="isUserCurrent" class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center 
+                      opacity-0 group-hover:opacity-100 transition cursor-pointer" (click)="abrirModal = true">
+                <span class="text-white text-sm font-medium">Cambiar foto</span>
+                
+            </div>
+        </div>
+
+
+            <h2 class="text-xl font-semibold text-gray-800">{{ user.nombre_usuario }}</h2>
+            <span class="text-grisClaro2">#{{user.codeFriend}}</span>
+            <p class="text-gray-500">Nivel 0 • 0 puntos</p>
+
+            <div class="grid grid-cols-2 gap-4 mt-6">
+                <div class="bg-blue-100 rounded-xl p-3">
+                    <p class="text-lg font-bold text-blue-600">0</p>
+                    <span class="text-sm text-gray-500">Partidas</span>
+                </div>
+                <div class="bg-green-100 rounded-xl p-3">
+                    <p class="text-lg font-bold text-green-600">0%</p>
+                    <span class="text-sm text-gray-500">Victorias</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDITAR -->
+        <div *ngIf="isEditing" class="text-center space-y-4">
+            <app-editar></app-editar>
+        </div>
+        <div *ngIf="abrirModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white p-6 rounded-2xl shadow-lg w-96">
+                <app-upload-avatar (uploaded)="onAvatarUploaded($event)"></app-upload-avatar>
+                <button class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" (click)="abrirModal = false">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="flex justify-center items-center min-h-screen">
+    <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+        role="status">
+        <span
+            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+    </div>
+</div>

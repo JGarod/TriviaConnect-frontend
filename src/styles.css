@@ -22,3 +22,7 @@
     --azul-acento: #4B6CF7;
     --azul-banner-login: #3B55F7;
 } */
+html,
+body {
+    height: 100%;
+}

@@ -19,7 +19,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-
+  //registar el ususario en la db
   registrarUsuario(datos: IRegistro): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${this.apiUrl}/auth/register`, datos)
       .pipe(
@@ -31,7 +31,7 @@ export class AuthService {
         })
       );
   }
-
+  //valida el token de registro
   validarToken(token: string): Observable<ValidarTokenResponse> {
     return this.http.post<ValidarTokenResponse>(`${this.apiUrl}/auth/verificarRegistro`, { token });
   }

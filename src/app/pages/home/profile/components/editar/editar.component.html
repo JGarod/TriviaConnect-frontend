@@ -1,0 +1,47 @@
+<!-- profile-tabs.component.html -->
+<div class="w-full">
+    <!-- Tabs -->
+    <div class="flex border-b border-gray-300">
+
+        <!-- Información Personal -->
+        <button class="flex items-center gap-2 px-4 py-2 -mb-px font-medium border-b-2 transition-colors" [ngClass]="{
+        'border-blue-500 text-blue-600': selectedTab === 'personal',
+        'border-transparent text-gray-500 hover:text-blue-500': selectedTab !== 'personal'
+      }" (click)="setTab('personal')">
+            <!-- Ícono (siempre se muestra) -->
+            <span class="material-icons material-symbols-outlined">
+                account_circle
+            </span>
+            <!-- Texto solo si está seleccionado -->
+            <span *ngIf="selectedTab === 'personal'">Información Personal</span>
+        </button>
+
+        <!-- Seguridad -->
+        <button class="flex items-center gap-2 px-4 py-2 -mb-px font-medium border-b-2 transition-colors" [ngClass]="{
+        'border-blue-500 text-blue-600': selectedTab === 'security',
+        'border-transparent text-gray-500 hover:text-blue-500': selectedTab !== 'security'
+      }" (click)="setTab('security')">
+<span class="material-icons material-symbols-outlined">
+    security
+</span>            <span *ngIf="selectedTab === 'security'">Seguridad</span>
+        </button>
+
+        <!-- Preferencias -->
+        <button class="flex items-center gap-2 px-4 py-2 -mb-px font-medium border-b-2 transition-colors" [ngClass]="{
+        'border-blue-500 text-blue-600': selectedTab === 'preferences',
+        'border-transparent text-gray-500 hover:text-blue-500': selectedTab !== 'preferences'
+      }" (click)="setTab('preferences')">
+            <span class="material-icons material-symbols-outlined">
+                construction
+            </span>
+            <span *ngIf="selectedTab === 'preferences'">Preferencias</span>
+        </button>
+    </div>
+
+    <!-- Contenido -->
+    <div class="mt-4 p-4 bg-white rounded shadow min-h-[200px]">
+        <app-cuenta *ngIf="selectedTab === 'personal'"></app-cuenta>
+        <app-seguridad *ngIf="selectedTab === 'security'"></app-seguridad>
+        <app-preferencias *ngIf="selectedTab === 'preferences'"></app-preferencias>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div *ngIf="isLoading" class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+    role="status">
+    <span
+        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+</div>
+<div *ngIf="!isLoading">
+    <form [formGroup]="perfilForm" (ngSubmit)="savePerfil()" class="space-y-4">
+    <div class="mt-2">
+        <label class="block text-sm text-left">Nombre</label>
+        <input formControlName="username"
+            class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" />
+        <p *ngIf="perfilForm.get('username')?.invalid && perfilForm.get('username')?.touched"
+            class="text-red-500 text-left text-xs mt-1">
+            Nombre es requerido
+        </p>
+    </div>
+    
+    <div class="mt-2">
+        <label class="block text-sm text-left">Correo</label>
+        <input type="email" formControlName="email"
+            class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" />
+        <p *ngIf="perfilForm.get('email')?.invalid && perfilForm.get('email')?.touched" class="text-red-500 text-left text-xs mt-1">
+            Ingresa un correo válido
+        </p>
+    </div>
+
+    
+    
+        <button type="submit" [disabled]="perfilForm.invalid || isLoading"
+            class="bg-azulAcento hover:bg-azulSecundario text-blancoPuro font-semibold rounded-md py-2 px-4 w-full flex justify-center items-center gap-2">
+    
+            <ng-container *ngIf="!isLoading; else loadingTpl">
+                Actualizar
+            </ng-container>
+    
+            <ng-template #loadingTpl>
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Cargando...
+            </ng-template>
+        </button>
+            <div *ngIf="mensaje" class="text-blue-500 text-sm mt-1">
+                {{mensaje}}
+            </div>
+    </form>
+</div>
+

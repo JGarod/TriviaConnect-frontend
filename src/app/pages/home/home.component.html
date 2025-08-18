@@ -1,48 +1,18 @@
 <!-- Layout principal -->
-<div class="h-screen flex flex-col bg-blancoPuro">
+<div class="h-screen flex flex-col bg-grisClaro">
 
     <!-- Navbar superior (solo en desktop) -->
-    <nav class="hidden md:flex bg-blancoPuro shadow-sm border-b px-4 py-3 items-center justify-between">
-
-        <div class="flex items-center space-x-3">
-            <img src="logo.png" alt="Logo" class="h-8 w-8">
-            <span class="text-xl font-semibold text-grisOscuro">MiApp</span>
-        </div>
-
-        <div class="relative" #userDropdown>
-            <button (click)="toggleUserDropdown()"
-                class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-blancoPuro transition-colors">
-                <img src="user-avatar.png" alt="Avatar" class="h-8 w-8 rounded-full">
-                <span class="text-sm font-medium text-grisOscuro">Usuario</span>
-                <span class="material-icons text-grisOscuro">expand_more</span>
-            </button>
-
-            <!-- Dropdown del usuario -->
-            <div
-                [class]="'absolute right-0 mt-2 w-48 bg-blancoPuro rounded-lg shadow-lg border z-50 ' + (showUserDropdown ? 'block' : 'hidden')">
-                <div class="py-2">
-                    <a routerLink="/profile" class="block px-4 py-2 text-sm text-grisOscuro hover:bg-blancoPuro">
-                        <span class="material-icons text-sm mr-2 align-middle">person</span>Mi Perfil
-                    </a>
-                    <a routerLink="/settings" class="block px-4 py-2 text-sm text-grisOscuro hover:bg-blancoPuro">
-                        <span class="material-icons text-sm mr-2 align-middle">settings</span>Configuración
-                    </a>
-                    <hr class="my-1">
-                    <button (click)="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                        <span class="material-icons text-sm mr-2 align-middle">logout</span>Cerrar Sesión
-                    </button>
-                </div>
-                </div>
-                </div>
-                </nav>
+<app-nav-arriba *ngIf="!isMobile" [ruserData]="userData"></app-nav-arriba>
                 <div class="flex-1 flex overflow-hidden h-screen">
-                    <app-nav-bar [(rnavigationItems)]="navigationItems" [(rsidebarMinimizado)]="sidebarMinimizado">
+                    <app-nav-bar *ngIf="!isMobile" [(rnavigationItems)]="navigationItems" [(rsidebarMinimizado)]="sidebarMinimizado">
                     </app-nav-bar>
                     <!-- Contenido principal -->
-                    <main class="flex-1 overflow-y-auto p-4 pb-20 md:pb-4">
+                    <main class="flex-1 lg:p-1 overflow-y-auto pb-20 md:pb-4">
+                        <!-- <main class="flex-1 overflow-y-auto lg:p-4 pb-20 md:pb-4"> -->
                         <router-outlet></router-outlet>
         </main>
     </div>
-<app-app-mobile [navigationItems]="navigationItems" (logoutClick)="logout()"></app-app-mobile>
+<app-app-mobile *ngIf="isMobile" [ruserData]="userData" [navigationItems]="navigationItems"
+    (logoutClick)="logout()"></app-app-mobile>
 
 </div>

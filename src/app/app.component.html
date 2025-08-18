@@ -17,3 +17,4 @@
     </div> -->
 
 <router-outlet></router-outlet>
+<app-spinner *ngIf="spinnerService.loading$ | async"></app-spinner>
