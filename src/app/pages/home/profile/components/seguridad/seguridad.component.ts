@@ -55,7 +55,7 @@ export class SeguridadComponent {
    try {
      this.spinnerService.show();
      this.profileService.postChangePassword(this.securityForm.value).subscribe({
-       next: (response) => {
+       next: () => {
          this.spinnerService.hide();
        },
        error: (err) => {

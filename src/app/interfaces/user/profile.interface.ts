@@ -52,3 +52,14 @@ export interface sendChangePassword {
     passwordUno: string;
     passwordDos: string;
 }
+
+
+export interface preferencesUser {
+    acepta_solicitud_amistad: boolean;
+    color_primario: string;
+    color_secundario: string;
+}
+
+export interface getMessage {
+    message: string;
+}

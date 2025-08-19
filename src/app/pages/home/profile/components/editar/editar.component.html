@@ -42,6 +42,7 @@
     <div class="mt-4 p-4 bg-white rounded shadow min-h-[200px]">
         <app-cuenta *ngIf="selectedTab === 'personal'"></app-cuenta>
         <app-seguridad *ngIf="selectedTab === 'security'"></app-seguridad>
-        <app-preferencias *ngIf="selectedTab === 'preferences'"></app-preferencias>
+        <app-preferencias [rPreferences]="editarPreferences" (preferencesUpdated)="preferencesUpdated.emit($event)"
+            *ngIf="selectedTab === 'preferences'"></app-preferencias>
     </div>
 </div>

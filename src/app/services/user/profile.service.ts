@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenService } from '../token-auth/token.service';
-import {  getImgUser, getPrivateProfile, getProfile, PrivateProfileResponse, ProfileResponse, receiveUpdateBasic, sendChangePassword, sendUpdateBasic } from '../../interfaces/user/profile.interface';
+import { getImgUser, getMessage, getPrivateProfile, getProfile, preferencesUser, PrivateProfileResponse, ProfileResponse, receiveUpdateBasic, sendChangePassword, sendUpdateBasic } from '../../interfaces/user/profile.interface';
 import { ErrorResponse } from '../../interfaces/shared/errorResponse.interface';
 
 @Injectable({
@@ -81,17 +81,35 @@ export class ProfileService {
   }
 
   //ENVIAR LA SOLICITUD DE CAMBIO DE CLAVE
-  postChangePassword(data: sendChangePassword): Observable<any> {
+  postChangePassword(data: sendChangePassword): Observable<getMessage> {
     const token = this.tokenService.getToken();
 
     const headers = new HttpHeaders(
       token ? { Authorization: `Bearer ${token}` } : {}
     );
 
-    return this.http.post<any>(`${this.baseUrl}/profile/edit/password-user`, data, { headers }).pipe(
-      map((response: any) => {
+    return this.http.post<getMessage>(`${this.baseUrl}/profile/edit/password-user`, data, { headers }).pipe(
+      map((response: getMessage) => {
         this.tokenService.logout();
         return response; // Puedes modificar esto según lo que la API responda
+      }),
+      catchError(err => {
+        const error = err.error as ErrorResponse;
+        return throwError(() => new Error(error.message || 'Error inesperado'));
+      })
+    );
+  }
+
+  postPreferencesUser(data: preferencesUser): Observable<getMessage> {
+    const token = this.tokenService.getToken();
+
+    const headers = new HttpHeaders(
+      token ? { Authorization: `Bearer ${token}` } : {}
+    );
+
+    return this.http.post<getMessage>(`${this.baseUrl}/profile/edit/preferences-user`, data, { headers }).pipe(
+      map((response: getMessage) => {
+        return response;
       }),
       catchError(err => {
         const error = err.error as ErrorResponse;

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../../services/user/profile.service';
-import { getProfile } from '../../../interfaces/user/profile.interface';
+import { getProfile, preferencesUser } from '../../../interfaces/user/profile.interface';
 import { TokenService } from '../../../services/token-auth/token.service';
 import { EditarComponent } from './components/editar/editar.component';
 import { UploadAvatarComponent } from './components/upload-avatar/upload-avatar.component';
@@ -18,7 +18,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class ProfileComponent {
   public isEditing = false;
-  public userPreferences = {
+  public userPreferences: preferencesUser = {
     color_primario: '#1E3A8A', // azul oscuro (hex)
     color_secundario: '#9333EA' ,   // morado (hex)
     acepta_solicitud_amistad:false,
@@ -91,4 +91,9 @@ export class ProfileComponent {
   }
 
 
+  capturarPreferenciaNieto(newPrefs: any) {
+    console.log('Preferencias actualizadas desde nieto:', newPrefs);
+    this.userPreferences = { ...newPrefs };
+    // Aquí puedes también guardar en backend, localStorage, etc.
+  }
 }
