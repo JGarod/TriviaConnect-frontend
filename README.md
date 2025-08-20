@@ -1,27 +1,38 @@
-# Frontend
+# 🎯 TriviaConnect
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+**TriviaConnect** es una aplicación web interactiva de trivia en tiempo real, donde los usuarios pueden crear salas, unirse a partidas y competir con amigos en diferentes categorías como deportes, historia, geografía, ciencia y cultura.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Tecnologías Utilizadas
 
-## Code scaffolding
+### Backend
+- **Node.js** – Entorno de ejecución para JavaScript.
+- **Express.js** – Framework para la creación de APIs REST.
+- **Sequelize** – ORM para manejo de base de datos SQL.
+- **PostgreSQL / MySQL** – Base de datos relacional (configurable en `.env`).
+- **Socket.io** – Comunicación en tiempo real para las salas de juego.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Frontend
+- **Angular** – Framework para SPA (Single Page Application).
+- **TailwindCSS** – Framework CSS para diseño responsive y moderno.
+- **TypeScript** – Tipado estático en el frontend.
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 📂 Estructura del Proyecto
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```plaintext
+📦 TriviaConnect
+ ┣ 📂 backend
+ ┃ ┣ 📂 models        # Modelos Sequelize (Usuario, Sala, Pregunta, etc.)
+ ┃ ┣ 📂 routes        # Rutas API REST
+ ┃ ┣ 📂 controllers   # Lógica de negocio
+ ┃ ┣ 📜 database.js   # Configuración de Sequelize
+ ┃ ┗ 📜 server.js     # Servidor principal
+ ┣ 📂 frontend
+ ┃ ┣ 📂 src
+ ┃ ┃ ┣ 📂 app         # Componentes y servicios Angular
+ ┃ ┃ ┣ 📂 assets      # Imágenes y recursos estáticos
+ ┃ ┃ ┗ 📜 styles.css  # Estilos globales
+ ┗ 📜 README.md

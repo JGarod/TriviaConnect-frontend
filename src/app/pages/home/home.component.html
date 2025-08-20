@@ -1,0 +1,18 @@
+<!-- Layout principal -->
+<div class="h-screen flex flex-col bg-grisClaro">
+
+    <!-- Navbar superior (solo en desktop) -->
+<app-nav-arriba *ngIf="!isMobile" [ruserData]="userData"></app-nav-arriba>
+                <div class="flex-1 flex overflow-hidden h-screen">
+                    <app-nav-bar *ngIf="!isMobile" [(rnavigationItems)]="navigationItems" [(rsidebarMinimizado)]="sidebarMinimizado">
+                    </app-nav-bar>
+                    <!-- Contenido principal -->
+                    <main class="flex-1 lg:p-1 overflow-y-auto pb-20 md:pb-4">
+                        <!-- <main class="flex-1 overflow-y-auto lg:p-4 pb-20 md:pb-4"> -->
+                        <router-outlet></router-outlet>
+        </main>
+    </div>
+<app-app-mobile *ngIf="isMobile" [ruserData]="userData" [navigationItems]="navigationItems"
+    (logoutClick)="logout()"></app-app-mobile>
+
+</div>

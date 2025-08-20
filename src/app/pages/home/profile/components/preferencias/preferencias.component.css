@@ -1,0 +1,166 @@
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+    transition: .3s ease;
+    border-radius: 34px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background: white;
+    transition: .3s ease;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+input:checked+.slider {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+/* Color picker personalizado */
+.color-picker-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.color-display {
+    width: 100%;
+    height: 60px;
+    border-radius: 12px;
+    border: 3px solid #e5e7eb;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.color-display:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.color-display::after {
+    content: '🎨';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.color-display:hover::after {
+    opacity: 1;
+}
+
+.color-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.color-label {
+    position: absolute;
+    bottom: -8px;
+    left: 8px;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.color-picker-wrapper:hover .color-label {
+    opacity: 1;
+}
+
+/* Animaciones */
+
+/* Botón responsivo */
+.btn-submit {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: scale(1);
+    transition: all 0.2s ease;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: scale(1.02);
+}
+
+.btn-submit:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-submit:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(to right, #6366f1, #a855f7);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: linear-gradient(to right, #4f46e5, #9333ea);
+}
+
+.btn-success {
+    background: linear-gradient(to right, #10b981, #059669);
+}
+
+.btn-success:hover:not(:disabled) {
+    background: linear-gradient(to right, #059669, #047857);
+}
+
+.btn-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: scale(1);
+}

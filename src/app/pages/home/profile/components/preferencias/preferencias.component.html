@@ -1,0 +1,64 @@
+<div class="max-w-md mx-auto form-container-ef">
+    <form class="space-y-8 form-field-ef" [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
+        <div class="mt-2 flex items-start justify-between">
+            <div>
+                <label for="aceptarSolicitudes" class="block text-sm text-left">
+                    Solicitudes de amistad
+                </label>
+                <p class="text-sm text-gray-500 mt-1 text-left">
+                    Permitir que otros usuarios te envíen solicitudes
+                </p>
+            </div>
+            <div class="relative flex items-center">
+                <label class="switch">
+                    <input type="checkbox" id="aceptarSolicitudes" formControlName="aceptarSolicitudes" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-2">
+            <!-- Color Primario -->
+            <div class="w-full md:w-1/2 px-2">
+                <label class="block text-lg font-semibold text-gray-800 mb-3">
+                    Color Primario
+                </label>
+                <div class="color-picker-wrapper">
+                    <div class="color-display" [style.background]="getPrimaryGradient()" (click)="colorPrimarioInput.click()">
+                        <input #colorPrimarioInput type="color" formControlName="colorPrimario" class="color-input" />
+                        <div class="color-label">Primario</div>
+                        </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Este será tu color principal de la interfaz</p>
+                        </div>
+                        
+                        <!-- Color Secundario -->
+            <div class=" w-full md:w-1/2 px-2">
+                <label class="block text-lg font-semibold text-gray-800 mb-3">
+                    Color Secundario
+                </label>
+                <div class="color-picker-wrapper">
+                    <div class="color-display" [style.background]="getSecondaryGradient()" (click)="colorSecundarioInput.click()">
+                        <input #colorSecundarioInput type="color" formControlName="colorSecundario" class="color-input" />
+                        <div class="color-label">Secundario</div>
+                        </div>
+                        </div>
+                <p class="text-sm text-gray-500 mt-2">elementos secundarios</p>
+                </div>
+                </div>
+                <button type="submit" [disabled]="preferencesForm.invalid || isLoading"
+                    class="bg-azulAcento hover:bg-azulSecundario text-blancoPuro font-semibold rounded-md py-2 px-4 w-full flex justify-center items-center gap-2">
+
+            <ng-container *ngIf="!isLoading; else loadingTpl">
+                Actualizar
+            </ng-container>
+
+            <ng-template #loadingTpl>
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Cargando...
+            </ng-template>
+            </button>
+<div *ngIf="mensaje" class="text-blue-500 text-sm mt-1">
+    {{mensaje}}
+</div>
+    </form>
+</div>
