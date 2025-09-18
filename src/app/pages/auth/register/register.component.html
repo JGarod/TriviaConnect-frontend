@@ -1,6 +1,9 @@
 <div class="bg-gray-100 flex justify-center items-center h-screen">
   
-    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2" *ngIf="estado==='Registro'">
+        <div class="flex justify-center mb-4 lg:hidden">
+            <img src="assets/logo/logo.png" alt="App Logo" class="w-20 h-20">
+        </div>
         <h1 class="text-2xl font-semibold mb-4">Registrate</h1>
         <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
             <div class="mb-4">
@@ -51,10 +54,19 @@
                 Las contraseñas no coinciden.
             </div>
         
-            <button type="submit" [disabled]="registroForm.invalid"
-                class="bg-azulSecundario hover:bg-azulAcento text-white font-semibold rounded-md py-2 px-4 w-full">
+        <button type="submit" [disabled]="registroForm.invalid || isLoading"
+            class="bg-azulSecundario hover:bg-azulAcento text-white font-semibold rounded-md py-2 px-4 w-full flex justify-center items-center gap-2">
+        
+            <ng-container *ngIf="!isLoading; else loadingTpl">
                 Registro
-            </button>
+            </ng-container>
+            
+            <ng-template #loadingTpl>
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Cargando...
+            </ng-template>
+        </button>
+
             <div *ngIf="mensaje"
                 class="text-blue-500 text-sm mt-1">
                 {{mensaje}}
@@ -68,6 +80,16 @@
             </a>
         </div>
 
+    </div>
+    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2" *ngIf="estado==='Verificacion'">
+        <h1 class="text-2xl font-semibold mb-4">Valida tu cuenta</h1>
+        <p>Te hemos enviado un correo de verificación a <span class="text-azulBannerLogin">{{email}}</span></p>
+        <p>
+            Por favor, revisa tu bandeja de entrada y sigue las instrucciones para activar tu cuenta.
+        </p>
+        <p class="mt-2 text-blue-500 cursor-pointer" (click)="reenviarCorreo()">
+            Reenviar Correo
+        </p>
     </div>
 <div class="w-1/2 h-screen hidden lg:flex items-center justify-center bg-azulBannerLogin">
     <img src="assets/banners/triviaRegistrate.png" alt="TriviaConnect Banner"

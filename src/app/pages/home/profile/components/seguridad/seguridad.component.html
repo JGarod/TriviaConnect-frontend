@@ -1,0 +1,110 @@
+<div *ngIf="isLoading"
+    class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+    role="status">
+    <span
+        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+</div>
+<div *ngIf="!isLoading" class="form-container-ef">
+    <form [formGroup]="securityForm" (ngSubmit)="validarData()" class="space-y-4 form-field-ef">
+
+        <!-- Contraseña Actual -->
+        <div class="mt-2">
+            <label class="block text-sm text-left">Contraseña Actual</label>
+            <div class="relative">
+                <input [type]="passwordVisible ? 'text' : 'password'" id="password" formControlName="password"
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                    autocomplete="off" />
+                <button type="button" (click)="togglePasswordVisibility('password')"
+                    class="absolute right-2 top-1/2 transform -translate-y-1/2 text-azulAcento">
+                    <span class="material-icons" *ngIf="!passwordVisible" >visibility</span>
+                    <span class="material-icons" *ngIf="passwordVisible" >visibility_off</span>
+                </button>
+            </div>
+            <p *ngIf="securityForm.get('password')?.invalid && securityForm.get('password')?.touched"
+                class="text-red-500 text-left text-xs mt-1">
+                La contraseña actual es obligatoria.
+            </p>
+        </div>
+
+        <!-- Contraseña Nueva -->
+        <div class="mt-2">
+            <label class="block text-sm text-left">Contraseña</label>
+            <div class="relative">
+                <input [type]="passwordUnoVisible ? 'text' : 'password'" id="passwordUno" formControlName="passwordUno"
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                    autocomplete="off" />
+            <button type="button" (click)="togglePasswordVisibility('passwordUno')"
+                class="absolute right-2 top-1/2 transform -translate-y-1/2 text-azulAcento">
+                <span class="material-icons" *ngIf="!passwordUnoVisible">visibility</span>
+                <span class="material-icons" *ngIf="passwordUnoVisible">visibility_off</span>
+            </button>
+            </div>
+            <p *ngIf="securityForm.get('passwordUno')?.invalid && securityForm.get('passwordUno')?.touched"
+                class="text-red-500 text-left text-xs mt-1">
+                La contraseña es obligatoria.
+            </p>
+        </div>
+
+        <!-- Confirmar Contraseña -->
+        <div class="mt-2">
+            <label class="block text-sm text-left">Confirmar Contraseña</label>
+            <div class="relative">
+                <input [type]="passwordDosVisible ? 'text' : 'password'" id="passwordDos" formControlName="passwordDos"
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                    autocomplete="off" />
+            <button type="button" (click)="togglePasswordVisibility('passwordDos')"
+                class="absolute right-2 top-1/2 transform -translate-y-1/2 text-azulAcento">
+                <span class="material-icons" *ngIf="!passwordDosVisible">visibility</span>
+                <span class="material-icons" *ngIf="passwordDosVisible">visibility_off</span>
+            </button>
+            </div>
+            <p *ngIf="securityForm.get('passwordDos')?.invalid && securityForm.get('passwordDos')?.touched"
+                class="text-red-500 text-left text-xs mt-1">
+                Debes confirmar tu contraseña.
+            </p>
+        </div>
+
+        <!-- Error si las contraseñas no coinciden -->
+        <div *ngIf="securityForm.hasError('passwordMismatch') && securityForm.get('passwordDos')?.touched"
+            class="text-red-500 text-left text-xs mt-1">
+            Las contraseñas no coinciden.
+        </div>
+
+        <!-- Error si la contraseña antigua coincide con la nueva -->
+        <div *ngIf="!securityForm.hasError('passwordMismatch') && securityForm.hasError('passWordEqual') && securityForm.get('password')?.touched"
+            class="text-red-500 text-left text-xs mt-1">
+            La contraseña antigua no puede ser igual a la nueva.
+        </div>
+
+        <button type="submit" [disabled]="securityForm.invalid || isLoading"
+            class="bg-azulAcento hover:bg-azulSecundario text-blancoPuro font-semibold rounded-md py-2 px-4 w-full flex justify-center items-center gap-2">
+
+            <ng-container *ngIf="!isLoading; else loadingTpl">
+                Actualizar
+            </ng-container>
+
+            <ng-template #loadingTpl>
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Cargando...
+            </ng-template>
+        </button>
+
+        <div *ngIf="mensaje" class="text-blue-500 text-sm mt-1">
+            {{mensaje}}
+        </div>
+    </form>
+</div>
+
+<div *ngIf="abrirModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-2xl shadow-lg w-96">
+        <h3 class="text-lg font-bold">Cambio de Contraseña</h3>
+        <p class="mt-2">Al cambiar la contraseña, por razones de seguridad debes volver a iniciar sesión.</p>
+        <button class="mt-4 mx-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+           (click)="abrirModal = false">
+            Cerrar
+        </button>
+        <button class="mt-4 mx-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" (click)="saveChanges()">
+            Cerrar Sesión
+        </button>
+    </div>
+</div>

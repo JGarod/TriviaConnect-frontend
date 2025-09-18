@@ -1,0 +1,74 @@
+<!-- estadisticas.component.html -->
+<div class="p-5 mb-3 bg-white rounded-xl shadow-sm border border-gray-100">
+
+    <!-- Título con directiva de carga -->
+    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+        <i class="fas fa-chart-line text-blue-500 mr-2" *ngIf="!rIsLoading"></i>
+        <span [appLoading]="rIsLoading" appLoadingHeight="24px" appLoadingWidth="120px">
+            Estadísticas
+        </span>
+    </h2>
+
+    <!-- Estadísticas -->
+    <div class="grid grid-cols-3 gap-4 text-center">
+        <!-- Amigos -->
+        <div class="p-3 rounded-lg" [class.bg-blue-50]="!rIsLoading">
+            <div class="font-bold text-blue-600 text-2xl mx-auto" [appLoading]="rIsLoading" appLoadingHeight="28px"
+                appLoadingWidth="60%">
+                {{ statsData.friends }}
+            </div>
+            <div class="text-xs text-gray-600 mt-1 mx-auto" [appLoading]="rIsLoading" appLoadingHeight="16px"
+                appLoadingWidth="70%">
+                Amigos
+            </div>
+        </div>
+
+        <!-- Salas -->
+        <div class="p-3 rounded-lg" [class.bg-purple-50]="!rIsLoading">
+            <div class="font-bold text-purple-600 text-2xl mx-auto" [appLoading]="rIsLoading" appLoadingHeight="28px"
+                appLoadingWidth="60%">
+                {{ statsData.rooms }}
+            </div>
+            <div class="text-xs text-gray-600 mt-1 mx-auto" [appLoading]="rIsLoading" appLoadingHeight="16px"
+                appLoadingWidth="70%">
+                Salas
+            </div>
+        </div>
+
+        <!-- Partidas -->
+        <div class="p-3 rounded-lg" [class.bg-green-50]="!rIsLoading">
+            <div class="font-bold text-green-600 text-2xl mx-auto" [appLoading]="rIsLoading" appLoadingHeight="28px"
+                appLoadingWidth="60%">
+                {{ statsData.matches }}
+            </div>
+            <div class="text-xs text-gray-600 mt-1 mx-auto" [appLoading]="rIsLoading" appLoadingHeight="16px"
+                appLoadingWidth="70%">
+                Partidas
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="mt-4 pt-3 border-t border-gray-100">
+        <div class="flex justify-between items-center text-sm mb-1">
+            <span class="text-gray-600" [appLoading]="rIsLoading" appLoadingHeight="16px" appLoadingWidth="40%">
+                Progreso semanal
+            </span>
+            <span class="text-blue-600 font-medium" [appLoading]="rIsLoading" appLoadingHeight="16px"
+                appLoadingWidth="20%">
+                {{ statsData.weeklyProgress }}%
+            </span>
+        </div>
+
+    <div class="w-full bg-gray-200 rounded-full h-2 mt-1 overflow-hidden">
+        <!-- Skeleton -->
+        <div *ngIf="rIsLoading" class="h-2 bg-gray-300 animate-pulse w-[65%] rounded-full"></div>
+    
+        <!-- Barra real -->
+        <div *ngIf="!rIsLoading" class="h-2 bg-blue-600 rounded-full transition-all duration-500"
+            [style.width.%]="statsData.weeklyProgress">
+        </div>
+    </div>
+
+    </div>
+</div>

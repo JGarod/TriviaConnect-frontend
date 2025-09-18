@@ -1,0 +1,32 @@
+<!-- <nav class="hidden md:flex bg-blancoPuro shadow-sm border-b px-4 py-3 items-center justify-between"> -->
+<nav class="flex bg-blancoPuro shadow-sm border-b px-4 py-3 items-center justify-between">
+    <div class="flex items-center space-x-3">
+        <img src="assets/logo/logo.png" alt="Logo" class="h-8 w-8">
+        <!-- <span class="text-xl font-semibold text-grisOscuro">MiApp</span>4 -->
+    </div>
+
+    <div class="relative">
+        <button (click)="toggleUserDropdown()"
+            class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-blancoPuro transition-colors">
+            <img src="{{ruserData?.img}}" alt="Avatar" class="h-8 w-8 rounded-full">
+            <span class="text-sm font-medium text-grisOscuro">{{ ruserData?.username || '' }}</span>
+            <span class="material-icons text-grisOscuro">expand_more</span>
+        </button>
+
+        <div
+            [class]="'absolute right-0 mt-2 w-48 bg-blancoPuro rounded-lg shadow-lg border z-50 ' + (showUserDropdown ? 'block' : 'hidden')">
+            <div class="py-2">
+                <a (click)="irPerfil()" class="block cursor-pointer px-4 py-2 text-sm text-grisOscuro hover:bg-grisClaro2">
+                    <span class="material-icons text-sm mr-2 align-middle">person</span>Mi Perfil
+                </a>
+                <a routerLink="/settings" class="block cursor-pointer  px-4 py-2 text-sm text-grisOscuro hover:bg-grisClaro2">
+                    <span class="material-icons text-sm mr-2 align-middle">settings</span>Configuración
+                </a>
+                <hr class="my-1">
+                <button (click)="logout()" class="w-full cursor-pointer  text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                    <span class="material-icons text-sm mr-2 align-middle">logout</span>Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,32 @@
+<div class="p-5 mb-6 bg-white rounded-xl shadow-sm border border-gray-100">
+    <div class="flex items-center">
+
+        <!-- Imagen de perfil -->
+        <div class="w-16 h-16 rounded-full border-2 border-white shadow-md overflow-hidden" [appLoading]="rIsLoading"
+            appLoadingHeight="64px" appLoadingWidth="64px">
+            <img *ngIf="!rIsLoading && rUserData?.img" [src]="!rIsLoading ? rUserData.img : '' " class="w-16 h-16 rounded-full">
+        </div>
+
+        <div class="ml-4">
+            <h2 class="text-xl font-bold text-gray-800" [appLoading]="rIsLoading" appLoadingHeight="20px"
+                appLoadingWidth="140px">
+                {{ !rIsLoading ? rUserData.nombre_usuario : '' }}
+            </h2>
+
+            <p class="text-gray-500 text-sm" [appLoading]="rIsLoading" appLoadingHeight="16px" appLoadingWidth="120px">
+                <!-- {{ !rIsLoading ? ('Nivel ' + rUserData?.nivel + ' • ' + rUserData?.puntos + ' puntos') : '' }} -->
+            </p>
+
+            <!-- <div class="flex mt-1 space-x-2">
+                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full" [appLoading]="rIsLoading"
+                    appLoadingHeight="18px" appLoadingWidth="80px">
+                    {{ !rIsLoading ? 'Trivia Master' : '' }}
+                </span>
+                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full" [appLoading]="rIsLoading"
+                    appLoadingHeight="18px" appLoadingWidth="60px">
+                    {{ !rIsLoading ? 'Sabio' : '' }}
+                </span>
+            </div> -->
+        </div>
+    </div>
+</div>

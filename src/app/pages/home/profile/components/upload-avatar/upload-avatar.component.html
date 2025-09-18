@@ -1,0 +1,25 @@
+<div class="p-4 border-2 border-dashed rounded-2xl text-center cursor-pointer bg-grisClaro hover:bg-grisClaro2 transition"
+    (drop)="onDrop($event)" (dragover)="allowDrop($event)">
+
+    <!-- Preview si hay archivo -->
+    <div *ngIf="previewUrl; else selectBlock">
+        <img [src]="previewUrl" alt="preview" class="w-32 h-32 mx-auto rounded-full shadow-lg object-cover mb-4">
+    </div>
+
+    <!-- Bloque para seleccionar -->
+    <ng-template #selectBlock>
+        <p class="text-gray-600">Arrastra tu imagen aquí</p>
+        <p class="text-sm text-gray-400">o</p>
+        <label
+            class="mt-2 inline-block px-4 py-2 bg-azulSecundario text-white rounded-lg cursor-pointer hover:bg-azulAcento">
+            Seleccionar archivo
+            <input type="file" (change)="onFileSelected($event)" hidden accept=".jpg,.jpeg,.png" />
+        </label>
+    </ng-template>
+
+    <button *ngIf="selectedFile"
+        class="mt-4 px-6 py-2 bg-azulSecundario text-white rounded-lg shadow hover:bg-azulAcento disabled:opacity-50"
+        [disabled]="uploading" (click)="upload()">
+        {{ uploading ? 'Subiendo...' : 'Subir Imagen' }}
+    </button>
+</div>

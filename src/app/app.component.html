@@ -1,2 +1,20 @@
-<!-- src/app/app.component.html -->
+<!-- <div
+    class="min-h-screen bg-blancoPuro dark:bg-blancoPuro text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <header class="p-4 flex justify-between items-center border-b border-gray-300 dark:border-gray-700">
+        <h1 class="text-xl font-bold">Mi App</h1>
+
+        <button (click)="toggleDarkMode()"
+            class="px-4 py-2 bg-blue-500 dark:bg-blue-700 text-white rounded hover:bg-blue-600 dark:hover:bg-blue-800 transition">
+            {{ isDarkMode ? 'Modo Claro' : 'Modo Oscuro' }}
+        </button>
+    </header>
+
+    <main class="p-6">
+        
+    </main>
+    
+    </div> -->
+
 <router-outlet></router-outlet>
+<app-spinner *ngIf="spinnerService.loading$ | async"></app-spinner>
