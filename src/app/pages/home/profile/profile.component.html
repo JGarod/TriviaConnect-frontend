@@ -23,25 +23,25 @@
                 <ng-container [ngSwitch]="user.estado_amistad">
             
                     <!-- Enviar solicitud -->
-                    <button *ngSwitchCase="null" (click)="enviarSolicitud('pendiente')"
+                    <button *ngSwitchCase="null" (click)="gestionarSolicitud('pendiente')"
                         class="flex items-center gap-2 px-4 py-2 rounded-xl transition bg-green-500 hover:bg-green-600 text-white">
                         <span class="material-icons">person_add</span>
                     </button>
                     <!-- Pendiente -->
                     <ng-container *ngSwitchCase="'pendiente'">
                         <!-- Yo envié la solicitud -->
-                        <button *ngIf="user.id_solicitante === usuarioActual?.id" (click)="cancelarSolicitud(user)"
+                        <button *ngIf="user.id_solicitante === usuarioActual?.id" (click)="gestionarSolicitud('cancelado')"
                             class="flex items-center gap-2 px-4 py-2 rounded-xl bg-yellow-500 text-white">
                             <span class="material-icons">hourglass_empty</span>
                         </button>
                     
                         <!-- Me enviaron la solicitud -->
                         <div *ngIf="user.id_solicitante !== usuarioActual?.id" class="flex gap-2">
-                            <button (click)="aceptarSolicitud(user)"
+                            <button (click)="gestionarSolicitud('aceptado')"
                                 class="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 text-white">
                                 <span class="material-icons">check_circle</span>
                             </button>
-                            <button (click)="rechazarSolicitud(user)"
+                            <button (click)="gestionarSolicitud('rechazado')"
                                 class="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white">
                                 <span class="material-icons">cancel</span>
                             </button>
@@ -49,21 +49,29 @@
                     </ng-container>
                     
                     <!-- Aceptado -->
-                    <button *ngSwitchCase="'aceptado'" (click)="cancelarAmistad(user)"
+                    <button *ngSwitchCase="'aceptado'" (click)="gestionarSolicitud('cancelado')"
                         class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-400 hover:bg-gray-500 text-white">
                         <span class="material-icons">people</span>
                     </button>
                     
                     <!-- Cancelado -->
-                    <button *ngSwitchCase="'cancelado'" (click)="enviarSolicitud('pendiente')"
+                    <button *ngSwitchCase="'cancelado'" (click)="gestionarSolicitud('pendiente')"
                         class="flex items-center gap-2 px-4 py-2 rounded-xl bg-green-500 hover:bg-green-600 text-white">
                         <span class="material-icons">person_add</span>
                     </button>
                     <!-- Rechazado (solo lo ve quien rechazó) -->
-                    <span *ngSwitchCase="'rechazado'" class="text-red-500">
-                        Solicitud rechazada
-                    </span>
+                    <ng-container *ngSwitchCase="'rechazado'">
+                        <!-- Yo rechacé -->
+                        <span *ngIf="user.id_solicitante !== usuarioActual?.id" class="text-red-500">
+                            Solicitud rechazada
+                        </span>
                     
+                        <!-- Me rechazaron (yo era el solicitante) -->
+                        <button *ngIf="user.id_solicitante === usuarioActual?.id" (click)="gestionarSolicitud('cancelado')"
+                            class="flex items-center gap-2 px-4 py-2 rounded-xl bg-yellow-500 text-white">
+                            <span class="material-icons">hourglass_empty</span>
+                        </button>
+                        </ng-container>
                     </ng-container>
                     </ng-container>
         </div>

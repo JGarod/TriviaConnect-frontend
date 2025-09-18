@@ -39,8 +39,8 @@ export class HomeComponent {
     },
     {
       id: 'friends',
-      label: 'Amigos',
-      route: '/friends',
+      label: 'Social',
+      route: '/social',
       icon: 'people'
     },
     {
@@ -70,7 +70,7 @@ export class HomeComponent {
     if (!this.userData) {
       this.logout();
     } else {
-      this.userData.img = `${this.cloudPath}${this.userData.uuid_imagen}.jpg?v=${Date.now()}`;;
+      this.userData.img = `${this.cloudPath}${this.userData.uuid_imagen}.jpg?v=${Date.now()}`;
     }
   }
   //cerrar sesión

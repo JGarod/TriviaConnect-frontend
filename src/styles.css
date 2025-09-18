@@ -68,3 +68,44 @@ body {
         opacity: 1;
     }
 }
+/* En tu archivo de estilos global (styles.css) */
+.skeleton-loader {
+    background-color: #e5e7eb !important;
+    /* Color gris */
+    border-radius: 4px;
+    animation: pulse 1.5s ease-in-out infinite;
+    display: inline-block;
+}
+
+.skeleton-loader.mx-auto {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Estilos para mejorar la visualización */
+.bg-blue-50 {
+    background-color: #eff6ff;
+}
+
+.bg-purple-50 {
+    background-color: #faf5ff;
+}
+
+.bg-green-50 {
+    background-color: #f0fdf4;
+}

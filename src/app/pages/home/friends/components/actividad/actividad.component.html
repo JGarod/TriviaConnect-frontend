@@ -1,0 +1,48 @@
+<div class="p-5 bg-white rounded-xl shadow-sm border border-gray-100">
+    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+        <i class="fas fa-history text-purple-500 mr-2"></i> Actividad reciente
+    </h2>
+
+<div *ngFor="let item of activities"
+    class="flex items-start p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+
+    <!-- Ícono según el tipo -->
+    <div class="bg-blue-100 rounded-full p-2 mt-1 mr-3" *ngIf="item.tipo === 'Amistad'">
+        <i class="fas fa-user-plus text-blue-600"></i>
+    </div>
+    <div class="bg-purple-100 rounded-full p-2 mt-1 mr-3" *ngIf="item.tipo === 'sala'">
+        <i class="fas fa-door-open text-purple-600"></i>
+    </div>
+    <div class="bg-green-100 rounded-full p-2 mt-1 mr-3" *ngIf="item.tipo === 'comentario'">
+        <i class="fas fa-comment text-green-600"></i>
+    </div>
+    <div class="bg-yellow-100 rounded-full p-2 mt-1 mr-3" *ngIf="item.tipo === 'trofeo'">
+        <i class="fas fa-trophy text-yellow-600"></i>
+    </div>
+
+    <!-- Texto dinámico -->
+    <div>
+    <p class="text-sm text-gray-800">
+        <ng-container *ngFor="let parte of item.partesTexto">
+            <a *ngIf="parte.slug" [routerLink]="parte.slug" class="font-semibold text-blue-600 hover:underline">
+                {{ parte.texto }}
+            </a>
+            <span *ngIf="!parte.slug">{{ parte.texto }}</span>
+        </ng-container>
+    </p>
+
+        <p class="text-xs text-gray-500">{{ item.createdAt | timeAgo }}</p>
+    </div>
+</div>
+
+    <!-- Botón cargar más -->
+    <span (click)="loadMore()"
+        class="block text-center text-blue-500 text-sm font-medium mt-3 pt-3 border-t border-gray-100 cursor-pointer"
+        *ngIf="page <= totalPages && !loading">
+        Cargar más actividad
+    </span>
+    <p class="text-center text-gray-400 text-sm mt-3" *ngIf="page > totalPages && !loading && activities.length > 0">
+        No se encontró más actividad.
+    </p>
+
+</div>

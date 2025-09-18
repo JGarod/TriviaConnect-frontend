@@ -95,7 +95,7 @@ export class ProfileComponent {
     // Aquí puedes también guardar en backend, localStorage, etc.
   }
 
-  enviarSolicitud(estado: string) {
+  gestionarSolicitud(estado: string) {
     try {
       const formData = {
         id_usuario: this.user.id_usuario,
@@ -103,8 +103,9 @@ export class ProfileComponent {
       };
       this.profileService.postAgregarUsuario(formData).subscribe({
         next: (res) => {
-          this.user.estado_amistad = res.dataAmistad.estado_amistad;
-          this.user.id_solicitante = res.dataAmistad.id_solicitante;
+          console.log('res', res);
+          this.user.estado_amistad = res.estado.estado_amistad;
+          this.user.id_solicitante = res.estado.id_solicitante;
         },
         error: (err) => {
 

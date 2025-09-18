@@ -68,7 +68,7 @@ export interface getMessage {
 
 export interface responseAmistad {
     message: string;
-    dataAmistad: getResponseAmistad;
+    estado: getResponseAmistad;
 }
 
 export interface getResponseAmistad {

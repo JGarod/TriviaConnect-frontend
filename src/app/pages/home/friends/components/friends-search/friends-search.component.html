@@ -1,0 +1,105 @@
+<div class="mb-6 p-5 bg-white rounded-xl shadow-sm border border-gray-100">
+  <h2 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+    <span class="material-icons text-gray-500 mr-2">search</span> Buscar amigos
+  </h2>
+
+  <!-- Barra de búsqueda -->
+  <div class="relative mb-4">
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearchChange()" placeholder="Buscar por nombre o codigo."
+      class="w-full px-4 pl-10 py-2.5 bg-gray-100 rounded-lg text-sm border-0 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200">
+    <span class="material-icons absolute left-3 top-3 text-gray-400 text-sm">search</span>
+
+    <!-- Botón para limpiar búsqueda -->
+    <button *ngIf="searchQuery.length > 0" (click)="clearSearch()"
+      class="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+      <span class="material-icons text-sm">close</span>
+    </button>
+  </div>
+
+  <!-- Filtros de búsqueda -->
+  <!-- <div class="flex flex-wrap gap-2 mb-4">
+    <button *ngFor="let filter of searchFilters" [class]="getFilterClass(filter)" (click)="toggleFilter(filter)">
+      {{filter.label}}
+    </button>
+  </div> -->
+
+  <!-- Estado de búsqueda -->
+  <div *ngIf="isSearching" class="flex justify-center py-4">
+    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+  </div>
+
+  <!-- Resultados de búsqueda -->
+  <div *ngIf="searchResults.length > 0" class="border-t border-gray-100 pt-4 mt-2">
+    <h3 class="text-sm font-semibold text-gray-700 mb-3">Resultados ({{searchResults.length}})</h3>
+
+    <div class="space-y-3 max-h-80 overflow-y-auto pr-2 scrollbar-hide">
+      <div *ngFor="let user of searchResults"
+        class="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors duration-200">
+        <div class="flex items-center gap-3 cursor-pointer"  [routerLink]="['/profile', user.slug]">
+          <div class="relative">
+            <img [src]="user.avatar" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
+            <span class="absolute -bottom-1 -right-1 bg-green-500 rounded-full w-3 h-3 border-2 border-white"></span>
+          </div>
+          <div>
+            <p class="font-medium text-gray-800">{{ user.nombre_usuario }}</p>
+            <p class="text-xs text-gray-500">{{user.codeFriend}}</p>
+            <!-- <p class="text-xs text-gray-500">Nivel {{ user.level }} • {{ user.points }} puntos</p> -->
+          </div>
+        </div>
+  <div class="rounded-lg flex gap-2" *ngIf="user.id_usuario!==userData?.id">
+    <!-- Amistad aceptada → botón para cancelar -->
+    <button (click)="sendFriendRequest('cancelado',user)" *ngIf="user.amistad_status === 'aceptado'"
+      class="material-icons text-green-500 text-lg hover:text-green-600">
+      check_circle
+    </button>
+  
+ 
+    <button  *ngIf="user.amistad_status === 'pendiente'"
+      class="material-icons text-blue-500 text-lg hover:text-blue-600">
+      schedule
+    </button>
+  
+    <!-- No amistad o cancelado → botón para enviar solicitud -->
+    <button (click)="sendFriendRequest('pendiente',user)" *ngIf="!user.amistad_status || user.amistad_status === 'cancelado'"
+      class="material-icons text-gray-500 text-lg hover:text-gray-700">
+      person_add
+    </button>
+  </div>
+
+        <!-- <button  *ngIf="user.amistad_status === 'pendiente'" class="p-1 rounded-full hover:bg-blue-100 transition-colors duration-200 cursor-default">
+          <span class="material-icons text-blue-500 text-sm">schedule</span>
+        </button> -->
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Sin resultados -->
+  <div *ngIf="searchQuery.length > 0 && searchResults.length === 0 && !isSearching"
+    class="border-t border-gray-100 pt-4 mt-2 text-center py-6">
+    <span class="material-icons text-gray-300 text-4xl mb-2">search_off</span>
+    <p class="text-gray-500 text-sm">No se encontraron resultados para "{{searchQuery}}"</p>
+    <p class="text-gray-400 text-xs mt-1">Intenta con otros términos de búsqueda</p>
+  </div>
+
+  <!-- Sugerencia de amigos en común -->
+  <!-- <div *ngIf="searchQuery.length === 0 && commonFriends.length > 0" class="border-t border-gray-100 pt-4 mt-4">
+    <h3 class="text-sm font-semibold text-gray-700 mb-3">Amigos en común</h3>
+
+    <div class="space-y-3">
+      <div *ngFor="let friend of commonFriends"
+        class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+        <div class="flex items-center gap-3">
+          <img [src]="friend.avatar" class="w-9 h-9 rounded-full border-2 border-white shadow-sm">
+          <div>
+            <p class="font-medium text-gray-800 text-sm">{{ friend.name }}</p>
+            <p class="text-xs text-gray-500">{{ friend.commonFriends }} amigos en común</p>
+          </div>
+        </div>
+        <button (click)="viewProfile(friend)" class="text-blue-500 hover:text-blue-700 text-xs font-medium">
+          Ver perfil
+        </button>
+      </div>
+    </div>
+  </div> -->
+</div>

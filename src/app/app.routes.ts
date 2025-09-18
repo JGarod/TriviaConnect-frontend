@@ -22,7 +22,7 @@ export const routes: Routes = [
         canActivateChild: [authGuard], // Proteger todas las rutas hijas
         children: [
             { path: '', component: DashboardComponent },   // /  → Dashboard dentro de HomeComponent
-            { path: 'friends', component: FriendsComponent },  // /perfil
+            { path: 'social', component: FriendsComponent },  // /perfil
             { path: 'profile/:slug', component: ProfileComponent },  // /friends
             // otras rutas hijas
         ]
